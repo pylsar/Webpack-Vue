@@ -1,5 +1,5 @@
 // главный файл приложения
-import Post from './Post.js';
+import Post from '@components/Post.js';
 import './styles/styles.css';
 import Logo from './assets/logo.jpg';
 import json from './assets/db.json';
