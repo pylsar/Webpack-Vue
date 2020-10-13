@@ -8,8 +8,7 @@ const TerserJSPlugin = require('terser-webpack-plugin');
 module.exports = {
     mode: 'development',
     entry: {
-        main: './src/index.js',
-        analytics: './src/analytics.js'
+        main: './src/index.js'
     },
     output: {
         filename: '[name].[contenthash].js',
