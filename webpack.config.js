@@ -4,6 +4,7 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
+const  VueLoaderPlugin  = require('vue-loader/lib/plugin');
 
 module.exports = {
     mode: 'development',
@@ -15,9 +16,10 @@ module.exports = {
         path: path.resolve(__dirname, 'dist')
     },
     resolve:{
-        extensions: ['.js', '.json'],
+        extensions: ['.js', '.json', '.vue'],
         alias: {
-            '@components': path.resolve(__dirname, 'src/components')
+            '@components': path.resolve(__dirname, 'src/components'),
+            'vue$': 'vue/dist/vue.esm.js'
         }
     }, 
     devServer: {
@@ -37,7 +39,8 @@ module.exports = {
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css'
-        })
+        }),
+        new VueLoaderPlugin()
     ],
     module: {
         rules: [
@@ -74,7 +77,11 @@ module.exports = {
                         presets: ['@babel/preset-env']
                     }
                 }
-            }
+            },
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            },
         ]
     }
 }
